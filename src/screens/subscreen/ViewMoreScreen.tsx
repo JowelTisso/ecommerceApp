@@ -12,7 +12,7 @@ import HeaderNav from '../../components/Header';
 
 const ViewMoreScreen = (props: any) => {
   const subprops = props.route.params; //Param sent through navigation
-  const handler = props.route.params.handler;
+  // const handler = props.route.params.handler;
 
   const categories = subprops.data;
   const statusbarHeight: any = StatusBar.currentHeight;
@@ -37,7 +37,7 @@ const ViewMoreScreen = (props: any) => {
               style={{flex: 1}}
               delayPressIn={0}
               onPress={() => {
-                props.navigation.navigate('ProductsScreen', {handler: handler});
+                props.navigation.navigate('ProductsScreen');
               }}>
               <CategoriesCard item={item} />
             </TouchableOpacity>

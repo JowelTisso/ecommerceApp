@@ -4,6 +4,7 @@ import ProductCard from '../../components/ProductCard';
 import {WishlistData} from '../../data/MockData';
 import * as CustomColor from '../../color/CustomColors';
 import HeaderNav from '../../components/Header';
+import {useIsFocused} from '@react-navigation/native';
 
 const WishlistScreen = (props: any) => {
   const [state, setState] = React.useState<number>();
@@ -11,14 +12,17 @@ const WishlistScreen = (props: any) => {
 
   const statusbarHeight: any = StatusBar.currentHeight;
 
+  const isFocused = useIsFocused();
+
   React.useEffect(() => {
+    //TO re-render the component for new items to be displayed on tab pressed
     const unsubscribe = navigation.addListener('tabPress', (e: any) => {
       setState(Math.random());
     });
-
     return unsubscribe;
-  }, [state, navigation]);
+  }, [state, isFocused]);
 
+  //To make random changes to the state so to re-render the components for updating the changes
   const renderHanlder = () => {
     setState(Math.random());
   };

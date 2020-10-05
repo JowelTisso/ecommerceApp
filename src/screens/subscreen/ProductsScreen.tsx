@@ -14,7 +14,7 @@ import {Products} from '../../data/MockData';
 const statusbarHeight: any = StatusBar.currentHeight;
 
 const ProductsScreen = (props: any) => {
-  const handler = props.route.params.handler;
+  // const handler = props.route.params.handler;
 
   return (
     <View style={{backgroundColor: 'white'}}>
@@ -39,7 +39,7 @@ const ProductsScreen = (props: any) => {
               navigate={props.navigation.navigate}
               isProductScreen={true}
               route={props.route}
-              handler={handler}
+              // handler={handler}
             />
           );
         }}

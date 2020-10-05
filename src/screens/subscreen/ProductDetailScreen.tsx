@@ -25,7 +25,7 @@ const ProductDetailScreen = (props: any) => {
   React.useEffect(() => {}, [state]);
 
   const {item} = props.route.params;
-  const handlerProp = props.route.params.handler;
+  // const handlerProp = props.route.params.handler;
 
   const imageHeight = Dimensions.get('window').height;
   const statusbarHeight: any = StatusBar.currentHeight;
@@ -132,7 +132,7 @@ const ProductDetailScreen = (props: any) => {
                 onPress={() => {
                   addToWishlist();
                   renderHandler();
-                  handlerProp();
+                  // handlerProp();
                 }}>
                 <Image source={wishImage} style={wishStyle} />
               </TouchableOpacity>

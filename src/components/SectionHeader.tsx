@@ -2,11 +2,6 @@ import * as React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Categories} from '../data/MockData';
 
-interface Props {
-  title?: string;
-  navigate?: any;
-}
-
 const SectionHeader = (props: any) => {
   return (
     <View style={styles.sectionHeader}>
@@ -18,7 +13,7 @@ const SectionHeader = (props: any) => {
         onPress={() => {
           props.navigation.navigate('ViewMore', {
             data: Categories,
-            handler: props.handler,
+            // handler: props.handler,
           });
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>

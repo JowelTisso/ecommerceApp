@@ -26,7 +26,7 @@ const ProductCard = (props: any) => {
             }
           : {
               flex: wishlistLength === props.index ? 0 : 1, // To find out the last odd item and set the flex to 0
-              width: '46%', // width only works for flex:0 which is the last element
+              width: '47%', // width only works for flex:0 which is the last element
               margin: 5,
             }
       }>

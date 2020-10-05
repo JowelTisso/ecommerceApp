@@ -23,6 +23,7 @@ import {
   ProductsForWomen,
 } from '../../data/MockData';
 import HeaderNav from '../../components/Header';
+import {useIsFocused} from '@react-navigation/native';
 
 const wait = (timeout: number) => {
   return new Promise((resolve) => {
@@ -34,9 +35,12 @@ const HomeScreen = (props: any) => {
   const clickHandler = (item: object) => {
     props.navigation.navigate('ProductDetail', {
       item: item,
-      handler: renderHandler,
+      // handler: renderHandler,
     });
   };
+
+  //For Checking if the screen is focused
+  const isFocused = useIsFocused();
 
   const [state, setState] = React.useState(0);
 
@@ -48,9 +52,8 @@ const HomeScreen = (props: any) => {
     const unsubscribe = props.navigation.addListener('tabPress', (e: any) => {
       setState(Math.random());
     });
-
     return unsubscribe;
-  }, [state, props.navigation]);
+  }, [state, props.navigation, isFocused]);
 
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -148,7 +151,7 @@ const HomeScreen = (props: any) => {
         <SectionHeader
           title={'For Men'}
           navigation={props.navigation}
-          handler={renderHandler}
+          // handler={renderHandler}
         />
         <View style={{}}>
           <FlatListSlider
@@ -166,7 +169,7 @@ const HomeScreen = (props: any) => {
         <SectionHeader
           title={'For Women'}
           navigation={props.navigation}
-          handler={renderHandler}
+          // handler={renderHandler}
         />
 
         <FlatListSlider
