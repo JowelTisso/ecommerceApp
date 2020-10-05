@@ -1,3 +1,4 @@
+import {useIsFocused} from '@react-navigation/native';
 import React from 'react';
 import {
   FlatList,
@@ -8,14 +9,17 @@ import {
   View,
 } from 'react-native';
 import CategoriesCard from '../../components/CategoriesCard';
-import HeaderNav from '../../components/Header';
+import Header from '../../components/Header';
 
 const ViewMoreScreen = (props: any) => {
   const subprops = props.route.params; //Param sent through navigation
-  // const handler = props.route.params.handler;
 
   const categories = subprops.data;
   const statusbarHeight: any = StatusBar.currentHeight;
+
+  const isFocused = useIsFocused();
+
+  React.useEffect(() => {}, [isFocused]);
 
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>
@@ -25,7 +29,7 @@ const ViewMoreScreen = (props: any) => {
           marginLeft: 15,
           marginRight: 15,
         }}>
-        <HeaderNav props={props} />
+        <Header props={props} />
       </View>
       <FlatList
         data={categories}

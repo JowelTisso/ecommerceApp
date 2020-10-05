@@ -1,3 +1,4 @@
+import {useIsFocused} from '@react-navigation/native';
 import * as React from 'react';
 import {
   ImageBackground,
@@ -12,14 +13,15 @@ import {
   FlatList,
 } from 'react-native';
 import * as CustomColor from '../../color/CustomColors';
-import HeaderNav from '../../components/Header';
+import Header from '../../components/Header';
 import ProfileItem from '../../components/ProfileItem';
 import {accountData, profileData} from '../../data/MockData';
 
-const profilePic =
-  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60';
-
 const ProfileScreen = (props: any) => {
+  const isFocused = useIsFocused();
+
+  React.useEffect(() => {}, [isFocused]);
+
   const goBack = () => {
     props.navigation.goBack();
   };
@@ -34,7 +36,7 @@ const ProfileScreen = (props: any) => {
           marginRight: -5,
           marginTop: 14,
         }}>
-        <HeaderNav props={props} />
+        <Header props={props} />
       </View>
 
       <View style={{flexDirection: 'row', marginTop: 10}}>
@@ -96,25 +98,20 @@ const ProfileScreen = (props: any) => {
             }}>
             <ImageBackground
               source={{
-                uri: profilePic,
+                uri: profileData.image,
               }}
               style={styles.profileImage}
               imageStyle={styles.profileImage}>
               <TouchableOpacity
                 delayPressIn={0}
                 onPress={() => {}}
-                style={{
-                  position: 'absolute',
-                  right: 1,
-                  bottom: 1,
-                  width: 30,
-                  alignItems: 'center',
-                }}>
+                style={styles.editIconContainer}>
                 <Image
-                  source={require('../../assets/picture.png')}
+                  source={require('../../assets/pencil.png')}
                   style={{
-                    height: 20,
-                    width: 20,
+                    height: 13,
+                    width: 13,
+                    tintColor: CustomColor.colorAccent,
                   }}
                 />
               </TouchableOpacity>
@@ -135,17 +132,7 @@ const ProfileScreen = (props: any) => {
             );
           }}
           keyExtractor={(item: any) => item.key.toString()}
-          ItemSeparatorComponent={() => (
-            <View
-              style={{
-                backgroundColor: CustomColor.border,
-                height: 1,
-                marginLeft: 60,
-                marginRight: 15,
-                marginTop: 5,
-              }}
-            />
-          )}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
         />
       </View>
     </ImageBackground>
@@ -192,5 +179,22 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 15,
     paddingTop: 12,
+  },
+  separator: {
+    backgroundColor: CustomColor.border,
+    height: 1,
+    marginLeft: 60,
+    marginRight: 15,
+    marginTop: 5,
+  },
+  editIconContainer: {
+    position: 'absolute',
+    right: 1,
+    bottom: 1,
+    width: 25,
+    alignItems: 'center',
+    backgroundColor: 'rgba(207, 204, 204,0.7)',
+    borderRadius: 25,
+    padding: 5,
   },
 });

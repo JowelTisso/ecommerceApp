@@ -22,7 +22,7 @@ import {
   Products,
   ProductsForWomen,
 } from '../../data/MockData';
-import HeaderNav from '../../components/Header';
+import Header from '../../components/Header';
 import {useIsFocused} from '@react-navigation/native';
 
 const wait = (timeout: number) => {
@@ -87,7 +87,7 @@ const HomeScreen = (props: any) => {
           marginLeft: 15,
           marginRight: 15,
         }}>
-        <HeaderNav props={props} />
+        <Header props={props} />
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}

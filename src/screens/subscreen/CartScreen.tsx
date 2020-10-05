@@ -1,87 +1,64 @@
 import * as React from 'react';
 import {
   Image,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
   Dimensions,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native';
 import CartItem from '../../components/CartItem';
 import {cartData} from '../../data/MockData';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import * as CustomColors from '../../color/CustomColors';
-import HeaderNav from '../../components/Header';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import Header from '../../components/Header';
+import CartItemHidden from '../../components/CartItemHidden';
 
 const height = Dimensions.get('window').height;
 
 const CartScreen = (props: any) => {
   const [promoValue, setPromoValue] = React.useState('springsale');
   const [cartIndex, setCartIndex] = React.useState<number>();
+  const [state, setState] = React.useState(0);
 
-  React.useEffect(() => {}, [cartIndex]);
+  React.useEffect(() => {}, [cartIndex, state]);
 
-  const HiddenItem = (props: any) => {
-    return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <TouchableOpacity
-          delayPressIn={0}
-          style={{
-            flex: 1,
-            backgroundColor: '#ff3736',
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-          }}
-          onPress={() => {
-            cartData.splice(props.data.index, 1);
-            setCartIndex(cartData.length);
-          }}>
-          <Image
-            source={require('../../assets/delete.png')}
-            style={{
-              height: 18,
-              width: 18,
-              marginRight: 27,
-              tintColor: 'white',
-            }}
-          />
-        </TouchableOpacity>
-      </View>
-    );
+  var amount: number = 0;
+
+  const getTotalAmount = () => {
+    let price: number = 0;
+    cartData.map((item: any) => {
+      price = item.price * item.count;
+      amount += price;
+    });
+  };
+
+  getTotalAmount();
+
+  const renderHandler = () => {
+    setState(Math.random());
   };
 
   return (
     <View style={styles.mainContainer}>
-      <View
-        style={{
-          marginLeft: -5,
-          marginRight: -5,
-          marginTop: 14,
-          paddingLeft: 20,
-          paddingRight: 20,
-        }}>
-        <HeaderNav props={props} />
+      <View style={styles.headerContainer}>
+        <Header props={props} title="My Bag" />
       </View>
       <View style={{height: '63%'}}>
         <SwipeListView
           data={cartData}
-          renderItem={({item, index}: any) => (
-            <View style={{height: 90}}>
-              <CartItem product={item} />
-            </View>
-          )}
+          renderItem={({item}: any) => {
+            return (
+              <View style={{height: 90}}>
+                <CartItem product={item} renderHandler={renderHandler} />
+              </View>
+            );
+          }}
           keyExtractor={(item) => item.key.toString()}
-          renderHiddenItem={(data, rowMap) => <HiddenItem data={data} />}
+          renderHiddenItem={(data) => (
+            <CartItemHidden data={data} setCartIndex={setCartIndex} />
+          )}
           leftOpenValue={75}
           rightOpenValue={-75}
           disableRightSwipe={true}
@@ -96,7 +73,7 @@ const CartScreen = (props: any) => {
           paddingLeft: 20,
           paddingRight: 20,
         }}>
-        <View style={{}}>
+        <View>
           <View
             style={[
               styles.summaryContainer,
@@ -113,15 +90,10 @@ const CartScreen = (props: any) => {
                 alignItems: 'center',
               }}>
               <TextInput
-                style={{
-                  fontWeight: 'bold',
-                  color: CustomColors.colorAccent,
-                  fontSize: 14,
-                  width: 100,
-                }}
+                style={styles.promoInputText}
                 value={promoValue}
                 placeholder={'promo code'}
-                onChangeText={() => {}}
+                onChangeText={(e) => setPromoValue(e)}
               />
 
               <TouchableOpacity
@@ -132,12 +104,7 @@ const CartScreen = (props: any) => {
                 }}>
                 <Image
                   source={require('../../assets/cancel.png')}
-                  style={{
-                    height: 12,
-                    width: 12,
-                    marginLeft: 7,
-                    marginTop: 5,
-                  }}
+                  style={styles.clearBtn}
                 />
               </TouchableOpacity>
             </View>
@@ -150,7 +117,9 @@ const CartScreen = (props: any) => {
                 alignItems: 'center',
                 marginRight: 5,
               }}>
-              <Text style={{fontWeight: 'bold', color: '#252626'}}>$ 210</Text>
+              <Text style={{fontWeight: 'bold', color: '#252626'}}>
+                $ {amount}
+              </Text>
             </View>
           </View>
         </View>
@@ -172,9 +141,22 @@ const CartScreen = (props: any) => {
 export default CartScreen;
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    marginLeft: -5,
+    marginRight: -5,
+    marginTop: 14,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
   promo: {
     fontWeight: 'bold',
     color: CustomColors.lightText,
+  },
+  promoInputText: {
+    fontWeight: 'bold',
+    color: CustomColors.secondaryText,
+    fontSize: 14,
+    width: 100,
   },
   mainContainer: {
     backgroundColor: 'white',
@@ -199,5 +181,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  clearBtn: {
+    height: 12,
+    width: 12,
+    marginLeft: 7,
+    marginTop: 5,
   },
 });

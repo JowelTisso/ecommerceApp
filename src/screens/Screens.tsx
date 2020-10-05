@@ -5,6 +5,8 @@ import ProfileScreen from './mainscreen/ProfileScreen';
 import SearchScreen from './mainscreen/SearchScreen';
 import WishlistScreen from './mainscreen/WishlistScreen';
 import ViewMoreScreen from './subscreen/ViewMoreScreen';
+import NotificationScreen from './subscreen/NotificationScreen';
+
 export {
   CartScreen,
   HomeScreen,
@@ -13,4 +15,5 @@ export {
   SearchScreen,
   WishlistScreen,
   ViewMoreScreen,
+  NotificationScreen,
 };

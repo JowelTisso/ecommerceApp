@@ -6,12 +6,17 @@ import {
   StatusBar,
   StyleProp,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
+  Dimensions,
 } from 'react-native';
+import Ionicon from 'react-native-vector-icons/Ionicons';
+import {cartData} from '../data/MockData';
 import * as RootNavigation from '../routes/RootNavigation';
+import * as CustomColor from '../color/CustomColors';
 
-const HeaderNav = (props: any) => {
+const Header = (props: any) => {
   const route = props.props.route.name;
   const navigation = props.props.navigation;
 
@@ -61,6 +66,8 @@ const HeaderNav = (props: any) => {
     }
   };
 
+  const screenWidth = Dimensions.get('window').width;
+
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity
@@ -70,22 +77,56 @@ const HeaderNav = (props: any) => {
         }}>
         <Image source={image} style={menuStyle} />
       </TouchableOpacity>
+      <View
+        style={{
+          position: 'absolute',
+          left: screenWidth / 2 - 45, //To align the header title in center
+        }}>
+        <Text
+          style={{
+            color: CustomColor.colorAccent,
+            fontWeight: 'bold',
+            fontSize: 15,
+          }}>
+          {props.title}
+        </Text>
+      </View>
       <View style={{flexDirection: 'row'}}>
         <TouchableOpacity
           delayPressIn={0}
           onPress={() => RootNavigation.navigate('Cart', {})}>
+          <View style={{flexDirection: 'row', width: 35}}>
+            <Image
+              source={require('../assets/cart.png')}
+              style={styles.cartIcon}
+            />
+            <Ionicon
+              name={'ellipse'}
+              size={10}
+              color={'pink'}
+              style={{
+                marginLeft: -4,
+                display: cartData.length > 0 ? 'flex' : 'none',
+              }}
+            />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          delayPressIn={0}
+          onPress={() => {
+            RootNavigation.navigate('Notification', {});
+          }}>
           <Image
-            source={require('../assets/cart.png')}
-            style={styles.cartIcon}
+            source={require('../assets/bell.png')}
+            style={styles.bellIcon}
           />
         </TouchableOpacity>
-        <Image source={require('../assets/bell.png')} style={styles.bellIcon} />
       </View>
     </View>
   );
 };
 
-export default HeaderNav;
+export default Header;
 
 const statusbarHeight: any = StatusBar.currentHeight;
 
@@ -102,7 +143,6 @@ const styles = StyleSheet.create({
   cartIcon: {
     height: 20,
     width: 20,
-    marginRight: 20,
   },
   bellIcon: {
     height: 20,

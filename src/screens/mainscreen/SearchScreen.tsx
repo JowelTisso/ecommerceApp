@@ -1,10 +1,15 @@
+import {useIsFocused} from '@react-navigation/native';
 import * as React from 'react';
 import {Platform, StatusBar, StyleSheet, Text, View} from 'react-native';
-import HeaderNav from '../../components/Header';
+import Header from '../../components/Header';
 
 const statusbarHeight: any = StatusBar.currentHeight;
 
 const SearchScreen = (props: any) => {
+  const isFocused = useIsFocused();
+
+  React.useEffect(() => {}, [isFocused]);
+
   return (
     <View>
       <View
@@ -13,7 +18,7 @@ const SearchScreen = (props: any) => {
           marginLeft: 15,
           marginRight: 15,
         }}>
-        <HeaderNav props={props} />
+        <Header props={props} />
       </View>
       <Text>SearchScreen</Text>
     </View>

@@ -3,7 +3,7 @@ import {FlatList, Platform, StatusBar, StyleSheet, View} from 'react-native';
 import ProductCard from '../../components/ProductCard';
 import {WishlistData} from '../../data/MockData';
 import * as CustomColor from '../../color/CustomColors';
-import HeaderNav from '../../components/Header';
+import Header from '../../components/Header';
 import {useIsFocused} from '@react-navigation/native';
 
 const WishlistScreen = (props: any) => {
@@ -35,7 +35,7 @@ const WishlistScreen = (props: any) => {
           marginLeft: 15,
           marginRight: 15,
         }}>
-        <HeaderNav props={props} />
+        <Header props={props} />
       </View>
       <FlatList
         data={WishlistData}

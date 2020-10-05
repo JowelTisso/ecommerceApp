@@ -1,3 +1,4 @@
+import {useIsFocused} from '@react-navigation/native';
 import * as React from 'react';
 import {
   Image,
@@ -15,17 +16,18 @@ import {
   LogBox,
 } from 'react-native';
 import {FlatListSlider} from 'react-native-flatlist-slider';
-import HeaderNav from '../../components/Header';
+import Header from '../../components/Header';
 import {Preview} from '../../components/Preview';
 import {cartData, WishlistData} from '../../data/MockData';
 
 const ProductDetailScreen = (props: any) => {
   const [state, setState] = React.useState(0);
 
-  React.useEffect(() => {}, [state]);
+  const isFocused = useIsFocused();
+
+  React.useEffect(() => {}, [state, isFocused]);
 
   const {item} = props.route.params;
-  // const handlerProp = props.route.params.handler;
 
   const imageHeight = Dimensions.get('window').height;
   const statusbarHeight: any = StatusBar.currentHeight;
@@ -39,6 +41,10 @@ const ProductDetailScreen = (props: any) => {
     }
   };
 
+  const renderHandler = () => {
+    setState(Math.random());
+  };
+
   let foundItem = WishlistData.find((itemWish) => itemWish.name === item.name);
 
   let wishImage: ImageSourcePropType = require('../../assets/favourite.png');
@@ -47,10 +53,6 @@ const ProductDetailScreen = (props: any) => {
     width: 20,
     marginLeft: 17,
     tintColor: '#5c5e5d',
-  };
-
-  const renderHandler = () => {
-    setState(Math.random());
   };
 
   // To add item to wishlist and animate
@@ -85,7 +87,7 @@ const ProductDetailScreen = (props: any) => {
           marginLeft: 15,
           marginRight: 15,
         }}>
-        <HeaderNav props={props} />
+        <Header props={props} />
       </View>
       <ScrollView style={{flex: 1}}>
         <View style={{flex: 1.5, minHeight: imageHeight / 2}}>
@@ -132,7 +134,6 @@ const ProductDetailScreen = (props: any) => {
                 onPress={() => {
                   addToWishlist();
                   renderHandler();
-                  // handlerProp();
                 }}>
                 <Image source={wishImage} style={wishStyle} />
               </TouchableOpacity>
@@ -207,6 +208,7 @@ const ProductDetailScreen = (props: any) => {
             delayPressIn={0}
             onPress={() => {
               addToCart();
+              renderHandler();
             }}>
             <Text style={styles.button}>Add to cart</Text>
           </TouchableOpacity>

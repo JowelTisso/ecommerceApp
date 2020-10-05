@@ -11,7 +11,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {navigationRef, navbarRef} from './RootNavigation';
+import {navigationRef} from './RootNavigation';
 import {
   HomeScreen,
   ProductDetailScreen,
@@ -20,6 +20,7 @@ import {
   WishlistScreen,
   ProfileScreen,
   ViewMoreScreen,
+  NotificationScreen,
 } from '../screens/Screens';
 import ProductsScreen from '../screens/subscreen/ProductsScreen';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -41,6 +42,7 @@ const HomeTabs = () => {
           let icon: ImageSourcePropType = require('../assets/home.png');
           let iconBg: StyleProp<ImageStyle>;
 
+          //For Switching Animation in the tab icons
           switch (route.name) {
             case 'Home':
               icon = focused
@@ -103,6 +105,7 @@ const MainStack = () => {
       <Stack.Screen name="ViewMore" component={ViewMoreScreen} />
       <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
       <Stack.Screen name="Cart" component={CartScreen} />
+      <Stack.Screen name="Notification" component={NotificationScreen} />
     </Stack.Navigator>
   );
 };

@@ -39,6 +39,8 @@ export const Products: Array<object> = [
     key: 0,
     ratings: 4.8,
     count: 1,
+    size: 'M',
+    color: 'gray',
     desc:
       'This is a sample description text for testing the design, Just like Lorem Ipsum',
     images: [
@@ -65,6 +67,8 @@ export const Products: Array<object> = [
     key: 1,
     ratings: 4.4,
     count: 1,
+    size: 'M',
+    color: 'gray',
     desc:
       'This is a sample description text for testing the design, Just like Lorem Ipsum',
     images: [
@@ -91,6 +95,8 @@ export const Products: Array<object> = [
     key: 2,
     ratings: 3.7,
     count: 1,
+    size: 'M',
+    color: 'gray',
     desc:
       'This is a sample description text for testing the design, Just like Lorem Ipsum',
     images: [
@@ -117,6 +123,8 @@ export const Products: Array<object> = [
     key: 3,
     ratings: 4.1,
     count: 1,
+    size: 'M',
+    color: 'gray',
     desc:
       'This is a sample description text for testing the design, Just like Lorem Ipsum',
     images: [
@@ -143,6 +151,8 @@ export const Products: Array<object> = [
     key: 4,
     ratings: 4.7,
     count: 1,
+    size: 'M',
+    color: 'gray',
     desc:
       'This is a sample description text for testing the design, Just like Lorem Ipsum',
     images: [
@@ -172,6 +182,8 @@ export const ProductsForWomen: Array<object> = [
     key: 2,
     ratings: 3.7,
     count: 1,
+    size: 'M',
+    color: 'gray',
     desc:
       'This is a sample description text for testing the design, Just like Lorem Ipsum',
     images: [
@@ -198,6 +210,8 @@ export const ProductsForWomen: Array<object> = [
     key: 3,
     ratings: 4.1,
     count: 1,
+    size: 'M',
+    color: 'gray',
     desc:
       'This is a sample description text for testing the design, Just like Lorem Ipsum',
     images: [
@@ -224,6 +238,8 @@ export const ProductsForWomen: Array<object> = [
     key: 4,
     ratings: 4.7,
     count: 1,
+    size: 'M',
+    color: 'gray',
     desc:
       'This is a sample description text for testing the design, Just like Lorem Ipsum',
     images: [
@@ -252,6 +268,8 @@ export const cartData: Array<object> = [
     key: 0,
     ratings: 4.8,
     count: 2,
+    size: 'M',
+    color: 'gray',
     desc:
       'This is a sample description text for testing the design, Just like Lorem Ipsum',
     images: [
@@ -278,6 +296,8 @@ export const cartData: Array<object> = [
     key: 1,
     ratings: 4.4,
     count: 1,
+    size: 'M',
+    color: 'gray',
     desc:
       'This is a sample description text for testing the design, Just like Lorem Ipsum',
     images: [
@@ -304,6 +324,8 @@ export const cartData: Array<object> = [
     key: 2,
     ratings: 3.7,
     count: 1,
+    size: 'M',
+    color: 'gray',
     desc:
       'This is a sample description text for testing the design, Just like Lorem Ipsum',
     images: [
@@ -450,4 +472,6 @@ export const profileData = {
   name: 'Jowel Tisso',
   phone: 8822492119,
   email: 'joweltisso@gmail.com',
+  image:
+    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
 };
