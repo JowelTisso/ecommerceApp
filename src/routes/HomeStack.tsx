@@ -21,6 +21,7 @@ import {
   ProfileScreen,
   ViewMoreScreen,
   NotificationScreen,
+  PromoCodeScreen,
 } from '../screens/Screens';
 import ProductsScreen from '../screens/subscreen/ProductsScreen';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -100,12 +101,12 @@ const MainStack = () => {
   return (
     <Stack.Navigator headerMode={'none'}>
       <Stack.Screen name="Home" component={HomeTabs} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
       <Stack.Screen name="ViewMore" component={ViewMoreScreen} />
       <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
       <Stack.Screen name="Cart" component={CartScreen} />
       <Stack.Screen name="Notification" component={NotificationScreen} />
+      <Stack.Screen name="PromoCode" component={PromoCodeScreen} />
     </Stack.Navigator>
   );
 };

@@ -475,3 +475,33 @@ export const profileData = {
   image:
     'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
 };
+
+export const PromoCodeList: Array<object> = [
+  {
+    key: 0,
+    code: 'SPRSALE',
+    discountTag: '20%',
+    description: 'Springsale week discount',
+    expiryDate: 'Nov 23',
+    maxDiscount: '$20.00',
+    discount: 20,
+  },
+  {
+    code: 'WINSALE',
+    discountTag: '35%',
+    key: 1,
+    description: 'Wintersale week discount',
+    expiryDate: 'Dec 23',
+    maxDiscount: '$32.00',
+    discount: 35,
+  },
+  {
+    code: 'ENDSALE',
+    discountTag: '40%',
+    key: 2,
+    description: 'Endsale week discount',
+    expiryDate: 'Feb 23',
+    maxDiscount: '$40.00',
+    discount: 40,
+  },
+];

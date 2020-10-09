@@ -1,5 +1,12 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import * as CustomColor from '../color/CustomColors';
 import {bottomSheetRef} from '../routes/RootNavigation';
 import {itemIndex, WishlistData} from '../data/MockData';
@@ -12,6 +19,28 @@ const ProductCard = (props: any) => {
   // For Wishlist Screen
   const wishlistLength = WishlistData.length - 1;
   const handler = props.handler;
+
+  //Alert menu for removing an item from wishlist
+  const alertMenu = () => {
+    Alert.alert(
+      'Remove',
+      'Are you sure?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            WishlistData.splice(WishlistData.indexOf(item), 1); //To remove the data from the database
+            handler(); // For re-rendering the parent component to update the list
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
 
   return (
     <View
@@ -42,12 +71,11 @@ const ProductCard = (props: any) => {
             <TouchableOpacity
               delayPressIn={0}
               onPress={() => {
-                handler(); // For re-rendering the parent component to update the list
-                WishlistData.splice(WishlistData.indexOf(item), 1); //To remove the data from the database
+                alertMenu();
               }}
               style={styles.moreContainer}>
               <Image
-                source={require('../assets/favourite.png')}
+                source={require('../assets/delete.png')}
                 style={styles.moreMenu}
               />
             </TouchableOpacity>
@@ -85,20 +113,22 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   moreMenu: {
-    width: 13,
-    height: 13,
-    tintColor: 'white',
-    alignSelf: 'flex-end',
+    width: 12,
+    height: 12,
+    tintColor: '#fc585e',
     margin: 5,
     marginTop: 8,
+    alignSelf: 'center',
   },
   moreContainer: {
     position: 'absolute',
     alignSelf: 'flex-end',
     right: 10,
     top: 8,
-    width: 35,
-    height: 35,
+    width: 28,
+    height: 28,
     margin: -5,
+    backgroundColor: 'white',
+    borderRadius: 20,
   },
 });

@@ -11,6 +11,7 @@ import {
   Dimensions,
   Platform,
   StatusBar,
+  TouchableOpacity,
 } from 'react-native';
 import {Preview} from '../../components/Preview';
 import SectionHeader from '../../components/SectionHeader';
@@ -109,15 +110,17 @@ const HomeScreen = (props: any) => {
             data={TopicsData}
             renderItem={({item}) => {
               return (
-                <Text
-                  style={{
-                    color: '#515452',
-                    fontWeight: 'bold',
-                    marginRight: 30,
-                    marginLeft: 2,
-                  }}>
-                  {item}
-                </Text>
+                <TouchableOpacity delayPressIn={0}>
+                  <Text
+                    style={{
+                      color: '#515452',
+                      fontWeight: 'bold',
+                      marginRight: 30,
+                      marginLeft: 2,
+                    }}>
+                    {item}
+                  </Text>
+                </TouchableOpacity>
               );
             }}
             keyExtractor={(item) => item}
@@ -199,9 +202,10 @@ const styles = StyleSheet.create({
 
   topics: {
     flexDirection: 'row',
-    marginTop: 15,
+    marginTop: 10,
     marginLeft: 18,
     marginRight: 15,
+    padding: 5,
   },
   searchBar: {
     backgroundColor: '#f0f3f5',

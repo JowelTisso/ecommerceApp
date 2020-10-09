@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import * as CustomColors from '../color/CustomColors';
-import PopupMenu from './PopupMenu';
 
 const CartItem = (props: any) => {
   const quantity = props.product.count;
@@ -57,19 +56,10 @@ const CartItem = (props: any) => {
         {/*          Size and Color button container            */}
 
         <View style={{flexDirection: 'row', paddingBottom: 1}}>
-          {/*           Size selector Button            */}
-
-          <TouchableOpacity delayPressIn={0}>
-            <PopupMenu product={product} type={'size'} />
-          </TouchableOpacity>
+          <Text style={styles.basefont}>Size : {props.product.size}</Text>
           {/*           Separator            */}
           <Text style={{marginTop: -2, color: 'gray'}}> | </Text>
-
-          {/*           Size selector Button            */}
-
-          <TouchableOpacity delayPressIn={0}>
-            <PopupMenu product={product} type={'color'} />
-          </TouchableOpacity>
+          <Text style={styles.basefont}>Color : {props.product.color}</Text>
         </View>
       </View>
 

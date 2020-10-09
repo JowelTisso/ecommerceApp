@@ -6,6 +6,7 @@ import SearchScreen from './mainscreen/SearchScreen';
 import WishlistScreen from './mainscreen/WishlistScreen';
 import ViewMoreScreen from './subscreen/ViewMoreScreen';
 import NotificationScreen from './subscreen/NotificationScreen';
+import PromoCodeScreen from './subscreen/PromoCodeScreen';
 
 export {
   CartScreen,
@@ -16,4 +17,5 @@ export {
   WishlistScreen,
   ViewMoreScreen,
   NotificationScreen,
+  PromoCodeScreen,
 };

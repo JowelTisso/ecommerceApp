@@ -79,8 +79,9 @@ const Header = (props: any) => {
       </TouchableOpacity>
       <View
         style={{
-          position: 'absolute',
-          left: screenWidth / 2 - 45, //To align the header title in center
+          // position: 'absolute',
+          // left: screenWidth / 2 - 45, //To align the header title in center
+          marginLeft: 30,
         }}>
         <Text
           style={{

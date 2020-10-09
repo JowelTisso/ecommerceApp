@@ -76,6 +76,7 @@ export const Preview: React.FC<Props> = ({
     }
   };
 
+  //To animate the heart icon on screen focused
   if (foundItem) {
     wishImage = require('../assets/heart.png');
     wishStyle = {height: 15, width: 15, marginTop: 2, tintColor: 'red'};
@@ -160,7 +161,7 @@ const screenWidth = Dimensions.get('screen').width;
 const styles = StyleSheet.create({
   videoContainer: {
     width: 260,
-    paddingVertical: 15,
+    marginVertical: 12,
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',

@@ -3,7 +3,6 @@ import {
   Image,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
   Dimensions,
@@ -14,17 +13,32 @@ import {SwipeListView} from 'react-native-swipe-list-view';
 import * as CustomColors from '../../color/CustomColors';
 import Header from '../../components/Header';
 import CartItemHidden from '../../components/CartItemHidden';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const height = Dimensions.get('window').height;
 
 const CartScreen = (props: any) => {
-  const [promoValue, setPromoValue] = React.useState('springsale');
+  const [promoValue, setPromoValue] = React.useState('Add promo code');
   const [cartIndex, setCartIndex] = React.useState<number>();
   const [state, setState] = React.useState(0);
+  const [promoBtnState, setPromoBtnState] = React.useState(false);
+  const navigation = props.navigation;
 
-  React.useEffect(() => {}, [cartIndex, state]);
+  React.useEffect(() => {
+    // Button state handler
+    const buttonStateHandler = () => {
+      if (promoValue === 'Add promo code') {
+        setPromoBtnState(false);
+      } else {
+        setPromoBtnState(true);
+      }
+    };
+
+    buttonStateHandler();
+  }, [cartIndex, state, promoValue]);
 
   var amount: number = 0;
+  const item = props.route.params.item;
 
   const getTotalAmount = () => {
     let price: number = 0;
@@ -32,12 +46,26 @@ const CartScreen = (props: any) => {
       price = item.price * item.count;
       amount += price;
     });
+    //For calculating the discount in the total amount
+    if (amount != 0) {
+      if (item) {
+        if (promoValue != 'Add promo code') {
+          const discountAmount = amount * (item.discount / 100);
+          amount = amount - discountAmount;
+        }
+      }
+    }
   };
 
   getTotalAmount();
 
+  // For re-rendering the component to update changes
   const renderHandler = () => {
     setState(Math.random());
+  };
+  // For passing this handler to another component to change the promocode value from it
+  const promoHandler = (data: any) => {
+    setPromoValue(data);
   };
 
   return (
@@ -81,36 +109,60 @@ const CartScreen = (props: any) => {
                 borderBottomWidth: 1,
                 borderBottomColor: CustomColors.border,
                 paddingBottom: 2,
+                height: 40,
               },
             ]}>
-            <Text style={styles.promo}>Promo code</Text>
             <View
               style={{
                 flexDirection: 'row',
-                alignItems: 'center',
+                justifyContent: 'space-between',
+                flex: 1,
               }}>
-              <TextInput
-                style={styles.promoInputText}
-                value={promoValue}
-                placeholder={'promo code'}
-                onChangeText={(e) => setPromoValue(e)}
-              />
-
-              <TouchableOpacity
-                delayPressIn={0}
-                style={{height: 20, width: 25}}
-                onPress={() => {
-                  setPromoValue('');
-                }}>
+              <View style={{flexDirection: 'row'}}>
                 <Image
-                  source={require('../../assets/cancel.png')}
-                  style={styles.clearBtn}
+                  source={require('../../assets/discount.png')}
+                  style={{width: 15, height: 15, marginRight: 15}}
                 />
-              </TouchableOpacity>
+                <TouchableOpacity
+                  delayPressIn={0}
+                  onPress={() => {
+                    navigation.navigate('PromoCode', {
+                      promoHandler,
+                    });
+                  }}
+                  disabled={promoBtnState}>
+                  <Text style={styles.promo}>{promoValue}</Text>
+                </TouchableOpacity>
+              </View>
+              {promoValue !== 'Add promo code' && (
+                <TouchableOpacity
+                  onPress={() => {
+                    setPromoValue('Add promo code');
+                  }}
+                  style={{
+                    height: 25,
+                    width: 30,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Icon
+                    name="close-circle"
+                    size={20}
+                    color={CustomColors.colorAccent}
+                  />
+                </TouchableOpacity>
+              )}
             </View>
           </View>
           <View style={[styles.summaryContainer, {paddingTop: 13}]}>
-            <Text style={styles.promo}>Total Amount</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                marginLeft: -1,
+              }}>
+              <Icon name="wallet" size={17} color={CustomColors.colorAccent} />
+              <Text style={[styles.promo, {marginLeft: 14}]}>Total Amount</Text>
+            </View>
             <View
               style={{
                 flexDirection: 'row',

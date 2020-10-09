@@ -16,9 +16,7 @@ const PopupMenu = (props: any) => {
 
   return (
     <View>
-      <Menu
-        renderer={renderers.Popover}
-        rendererProps={{placement: 'auto', preferredPlacement: 'bottom'}}>
+      <Menu>
         <MenuTrigger
           text={type === 'size' ? `Size: ${size}` : `Color: ${color}`} // Menu title based on popup type
           customStyles={{triggerText: styles.basefont}}
